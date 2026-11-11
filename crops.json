@@ -1,0 +1,2502 @@
+[
+  {
+    "en": "Wheat",
+    "ar": "قمح",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_001",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Durum wheat",
+    "ar": "قمح صلب",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_002",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Barley",
+    "ar": "شعير",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_003",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Oats",
+    "ar": "شوفان",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_004",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rye",
+    "ar": "جاودار",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_005",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Triticale",
+    "ar": "تريتيكال",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_006",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Maize",
+    "ar": "ذرة شامية",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_007",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sweetcorn",
+    "ar": "ذرة سكرية",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_008",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rice",
+    "ar": "أرز",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_009",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sorghum",
+    "ar": "ذرة رفيعة",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_010",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pearl millet",
+    "ar": "دخن لؤلؤي",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_011",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Finger millet",
+    "ar": "دخن إصبعي",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_012",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Foxtail millet",
+    "ar": "دخن ذيل الثعلب",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_013",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Proso millet",
+    "ar": "دخن بروسو",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_014",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Teff",
+    "ar": "تيف",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_015",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Fonio",
+    "ar": "فونيو",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_016",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Japanese millet",
+    "ar": "دخن ياباني",
+    "family": "Poaceae",
+    "cycle": "annual",
+    "group_en": "Cereals",
+    "group_ar": "حبوب",
+    "id": "crop_017",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Faba bean",
+    "ar": "فول بلدي",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_018",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pea",
+    "ar": "بسلة",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_019",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chickpea",
+    "ar": "حمص",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_020",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lentil",
+    "ar": "عدس",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_021",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Common bean",
+    "ar": "فاصوليا",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_022",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cowpea",
+    "ar": "لوبيا",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_023",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Soyabean",
+    "ar": "فول صويا",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_024",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Groundnut",
+    "ar": "فول سوداني",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_025",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mung bean",
+    "ar": "ماش",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_026",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Black gram",
+    "ar": "ماش أسود",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_027",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Adzuki bean",
+    "ar": "فاصوليا أزوكي",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_028",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Bambara groundnut",
+    "ar": "فول بامبارا",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_029",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lima bean",
+    "ar": "فاصوليا ليما",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_030",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Runner bean",
+    "ar": "فاصوليا عداءة",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_031",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Winged bean",
+    "ar": "فاصوليا مجنحة",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_032",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lablab bean",
+    "ar": "لوبيا لبلاب",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_033",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Grass pea",
+    "ar": "جلبان",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_034",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "White lupin",
+    "ar": "ترمس أبيض",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_035",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Narrow-leaved lupin",
+    "ar": "ترمس ضيق الأوراق",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_036",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Yellow lupin",
+    "ar": "ترمس أصفر",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_037",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Fenugreek",
+    "ar": "حلبة",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_038",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Guar",
+    "ar": "جوار",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Pulses",
+    "group_ar": "بقوليات",
+    "id": "crop_039",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pigeon pea",
+    "ar": "بازلاء الحمام",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_040",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Alfalfa",
+    "ar": "برسيم حجازي",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_041",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Red clover",
+    "ar": "برسيم أحمر",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_042",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "White clover",
+    "ar": "برسيم أبيض",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_043",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sainfoin",
+    "ar": "علف إسبارسيت",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_044",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Leucaena",
+    "ar": "لوسينا",
+    "family": "Fabaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial legumes",
+    "group_ar": "بقول وعلف معمر",
+    "id": "crop_045",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Egyptian clover",
+    "ar": "برسيم مصري",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Forage",
+    "group_ar": "علف",
+    "id": "crop_046",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Crimson clover",
+    "ar": "برسيم قرمزي",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Forage",
+    "group_ar": "علف",
+    "id": "crop_047",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Common vetch",
+    "ar": "بيقية شائعة",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Forage",
+    "group_ar": "علف",
+    "id": "crop_048",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Hairy vetch",
+    "ar": "بيقية وبرية",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Forage",
+    "group_ar": "علف",
+    "id": "crop_049",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sunn hemp",
+    "ar": "كروتالاريا",
+    "family": "Fabaceae",
+    "cycle": "annual",
+    "group_en": "Forage",
+    "group_ar": "علف",
+    "id": "crop_050",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tomato",
+    "ar": "طماطم",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_051",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Potato",
+    "ar": "بطاطس",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_052",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Aubergine",
+    "ar": "باذنجان",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_053",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sweet pepper",
+    "ar": "فلفل حلو",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_054",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chilli pepper",
+    "ar": "فلفل حار",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_055",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tomatillo",
+    "ar": "طماطم مكسيكية",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_056",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tobacco",
+    "ar": "تبغ",
+    "family": "Solanaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables",
+    "group_ar": "خضار",
+    "id": "crop_057",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cape gooseberry",
+    "ar": "حرنكش",
+    "family": "Solanaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_058",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pepino",
+    "ar": "بيبينو",
+    "family": "Solanaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_059",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tamarillo",
+    "ar": "طماطم شجرية",
+    "family": "Solanaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_060",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Goji berry",
+    "ar": "توت جوجي",
+    "family": "Solanaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_061",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cucumber",
+    "ar": "خيار",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_062",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Courgette",
+    "ar": "كوسة",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_063",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pumpkin",
+    "ar": "قرع عسلي",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_064",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Butternut squash",
+    "ar": "قرع جوزي",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_065",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Watermelon",
+    "ar": "بطيخ",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_066",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Melon",
+    "ar": "شمام",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_067",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Bottle gourd",
+    "ar": "قرع زجاجي",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_068",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Bitter gourd",
+    "ar": "قرع مر",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_069",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sponge gourd",
+    "ar": "لوف",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_070",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Ridge gourd",
+    "ar": "لوف مضلع",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_071",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Snake gourd",
+    "ar": "قرع ثعباني",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_072",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Wax gourd",
+    "ar": "قرع شمعي",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_073",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cucamelon",
+    "ar": "خيار مكسيكي صغير",
+    "family": "Cucurbitaceae",
+    "cycle": "annual",
+    "group_en": "Cucurbits",
+    "group_ar": "قرعيات",
+    "id": "crop_074",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chayote",
+    "ar": "شايوت",
+    "family": "Cucurbitaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial cucurbits",
+    "group_ar": "قرعيات معمرة",
+    "id": "crop_075",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Ivy gourd",
+    "ar": "قرع لبلابي",
+    "family": "Cucurbitaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial cucurbits",
+    "group_ar": "قرعيات معمرة",
+    "id": "crop_076",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cabbage",
+    "ar": "كرنب",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_077",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Red cabbage",
+    "ar": "كرنب أحمر",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_078",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cauliflower",
+    "ar": "قرنبيط",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_079",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Broccoli",
+    "ar": "بروكلي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_080",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Brussels sprouts",
+    "ar": "كرنب بروكسل",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_081",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Kale",
+    "ar": "كرنب أجعد",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_082",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Kohlrabi",
+    "ar": "كرنب أبو ركبة",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_083",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pak choi",
+    "ar": "باك تشوي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_084",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chinese cabbage",
+    "ar": "كرنب صيني",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_085",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Turnip",
+    "ar": "لفت",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_086",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Swede",
+    "ar": "لفت سويدي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_087",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Radish",
+    "ar": "فجل",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_088",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Daikon",
+    "ar": "فجل أبيض طويل",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_089",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rocket",
+    "ar": "جرجير",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_090",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Garden cress",
+    "ar": "حب الرشاد",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_091",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mustard greens",
+    "ar": "خردل ورقي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_092",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Brown mustard",
+    "ar": "خردل بني",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_093",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "White mustard",
+    "ar": "خردل أبيض",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_094",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Black mustard",
+    "ar": "خردل أسود",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_095",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rapeseed",
+    "ar": "لفت زيتي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_096",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mizuna",
+    "ar": "ميزونا",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_097",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tatsoi",
+    "ar": "تاتسوي",
+    "family": "Brassicaceae",
+    "cycle": "annual",
+    "group_en": "Brassicas",
+    "group_ar": "خضار ورقية وجذرية",
+    "id": "crop_098",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Watercress",
+    "ar": "جرجير مائي",
+    "family": "Brassicaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial greens",
+    "group_ar": "أعشاب وخضار معمرة",
+    "id": "crop_099",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Horseradish",
+    "ar": "فجل حار",
+    "family": "Brassicaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial greens",
+    "group_ar": "أعشاب وخضار معمرة",
+    "id": "crop_100",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Wasabi",
+    "ar": "واسابي",
+    "family": "Brassicaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial greens",
+    "group_ar": "أعشاب وخضار معمرة",
+    "id": "crop_101",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Onion",
+    "ar": "بصل",
+    "family": "Amaryllidaceae",
+    "cycle": "annual",
+    "group_en": "Alliums",
+    "group_ar": "بصليات",
+    "id": "crop_102",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Garlic",
+    "ar": "ثوم",
+    "family": "Amaryllidaceae",
+    "cycle": "annual",
+    "group_en": "Alliums",
+    "group_ar": "بصليات",
+    "id": "crop_103",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Leek",
+    "ar": "كرات",
+    "family": "Amaryllidaceae",
+    "cycle": "annual",
+    "group_en": "Alliums",
+    "group_ar": "بصليات",
+    "id": "crop_104",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Shallot",
+    "ar": "بصل شالوت",
+    "family": "Amaryllidaceae",
+    "cycle": "annual",
+    "group_en": "Alliums",
+    "group_ar": "بصليات",
+    "id": "crop_105",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Spring onion",
+    "ar": "بصل أخضر",
+    "family": "Amaryllidaceae",
+    "cycle": "annual",
+    "group_en": "Alliums",
+    "group_ar": "بصليات",
+    "id": "crop_106",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chives",
+    "ar": "ثوم معمر",
+    "family": "Amaryllidaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial alliums",
+    "group_ar": "بصليات معمرة",
+    "id": "crop_107",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Garlic chives",
+    "ar": "ثوم معمر صيني",
+    "family": "Amaryllidaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial alliums",
+    "group_ar": "بصليات معمرة",
+    "id": "crop_108",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Welsh onion",
+    "ar": "بصل ويلزي",
+    "family": "Amaryllidaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial alliums",
+    "group_ar": "بصليات معمرة",
+    "id": "crop_109",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Carrot",
+    "ar": "جزر",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_110",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Parsnip",
+    "ar": "جزر أبيض",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_111",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Celery",
+    "ar": "كرفس",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_112",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Celeriac",
+    "ar": "كرفس جذري",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_113",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Parsley",
+    "ar": "بقدونس",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_114",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Coriander",
+    "ar": "كزبرة",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_115",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Dill",
+    "ar": "شبت",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_116",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cumin",
+    "ar": "كمون",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_117",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Anise",
+    "ar": "يانسون",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_118",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Caraway",
+    "ar": "كراوية",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_119",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chervil",
+    "ar": "بقدونس إفرنجي",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_120",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Florence fennel",
+    "ar": "شمر بصلي",
+    "family": "Apiaceae",
+    "cycle": "annual",
+    "group_en": "Vegetables and herbs",
+    "group_ar": "خضار وأعشاب",
+    "id": "crop_121",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Fennel",
+    "ar": "شمر",
+    "family": "Apiaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial herbs",
+    "group_ar": "أعشاب معمرة",
+    "id": "crop_122",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lovage",
+    "ar": "كاشم",
+    "family": "Apiaceae",
+    "cycle": "perennial",
+    "group_en": "Perennial herbs",
+    "group_ar": "أعشاب معمرة",
+    "id": "crop_123",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Spinach",
+    "ar": "سبانخ",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_124",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Swiss chard",
+    "ar": "سلق",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_125",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Beetroot",
+    "ar": "بنجر مائدة",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_126",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sugar beet",
+    "ar": "بنجر سكر",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_127",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Quinoa",
+    "ar": "كينوا",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_128",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Grain amaranth",
+    "ar": "قطيفة للحبوب",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_129",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Leaf amaranth",
+    "ar": "قطيفة ورقية",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_130",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Orach",
+    "ar": "قطف بستاني",
+    "family": "Amaranthaceae",
+    "cycle": "annual",
+    "group_en": "Leaf and root crops",
+    "group_ar": "ورقيات وجذور",
+    "id": "crop_131",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lettuce",
+    "ar": "خس",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_132",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Endive",
+    "ar": "هندباء إنديف",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_133",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chicory",
+    "ar": "شيكوريا",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_134",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Radicchio",
+    "ar": "راديكيو",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_135",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sunflower",
+    "ar": "عباد الشمس",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_136",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Safflower",
+    "ar": "قرطم",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_137",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Niger seed",
+    "ar": "نوج",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_138",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "German chamomile",
+    "ar": "بابونج ألماني",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_139",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Calendula",
+    "ar": "أقحوان طبي",
+    "family": "Asteraceae",
+    "cycle": "annual",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_140",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Stevia",
+    "ar": "ستيفيا",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Salads, oils and herbs",
+    "group_ar": "خضار وزيوت وأعشاب",
+    "id": "crop_141",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Globe artichoke",
+    "ar": "خرشوف",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_142",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Jerusalem artichoke",
+    "ar": "طرطوفة",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_143",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cardoon",
+    "ar": "خرشوف بري",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_144",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tarragon",
+    "ar": "طرخون",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_145",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Roman chamomile",
+    "ar": "بابونج روماني",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_146",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Yacon",
+    "ar": "ياكون",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_147",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Salsify",
+    "ar": "سالسيفاي",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_148",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Scorzonera",
+    "ar": "سكورزونيرا",
+    "family": "Asteraceae",
+    "cycle": "perennial",
+    "group_en": "Perennial crops",
+    "group_ar": "خضار وأعشاب معمرة",
+    "id": "crop_149",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mint",
+    "ar": "نعناع",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_150",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Peppermint",
+    "ar": "نعناع فلفلي",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_151",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Spearmint",
+    "ar": "نعناع بلدي",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_152",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rosemary",
+    "ar": "روزماري",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_153",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Thyme",
+    "ar": "زعتر",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_154",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sage",
+    "ar": "مريمية",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_155",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Oregano",
+    "ar": "أوريجانو",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_156",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Marjoram",
+    "ar": "بردقوش",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_157",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lavender",
+    "ar": "لافندر",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_158",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lemon balm",
+    "ar": "مليسة",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_159",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Hyssop",
+    "ar": "زوفا",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_160",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Winter savory",
+    "ar": "ندغ شتوي",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_161",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Holy basil",
+    "ar": "ريحان مقدس",
+    "family": "Lamiaceae",
+    "cycle": "perennial",
+    "group_en": "Aromatic herbs",
+    "group_ar": "أعشاب عطرية",
+    "id": "crop_162",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Basil",
+    "ar": "ريحان",
+    "family": "Lamiaceae",
+    "cycle": "annual",
+    "group_en": "Herbs and seeds",
+    "group_ar": "أعشاب وبذور",
+    "id": "crop_163",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Chia",
+    "ar": "شيا",
+    "family": "Lamiaceae",
+    "cycle": "annual",
+    "group_en": "Herbs and seeds",
+    "group_ar": "أعشاب وبذور",
+    "id": "crop_164",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Perilla",
+    "ar": "بريلا",
+    "family": "Lamiaceae",
+    "cycle": "annual",
+    "group_en": "Herbs and seeds",
+    "group_ar": "أعشاب وبذور",
+    "id": "crop_165",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Summer savory",
+    "ar": "ندغ صيفي",
+    "family": "Lamiaceae",
+    "cycle": "annual",
+    "group_en": "Herbs and seeds",
+    "group_ar": "أعشاب وبذور",
+    "id": "crop_166",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Okra",
+    "ar": "بامية",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_167",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cotton",
+    "ar": "قطن",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_168",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Roselle",
+    "ar": "كركديه",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_169",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Kenaf",
+    "ar": "تيل",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_170",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Jute",
+    "ar": "جوت",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_171",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Jew's mallow",
+    "ar": "ملوخية",
+    "family": "Malvaceae",
+    "cycle": "annual",
+    "group_en": "Fibre and vegetables",
+    "group_ar": "ألياف وخضار",
+    "id": "crop_172",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cocoa",
+    "ar": "كاكاو",
+    "family": "Malvaceae",
+    "cycle": "perennial",
+    "group_en": "Trees",
+    "group_ar": "أشجار",
+    "id": "crop_173",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Apple",
+    "ar": "تفاح",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_174",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pear",
+    "ar": "كمثرى",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_175",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Quince",
+    "ar": "سفرجل",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_176",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Peach",
+    "ar": "خوخ",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_177",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Nectarine",
+    "ar": "نكتارين",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_178",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Apricot",
+    "ar": "مشمش",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_179",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Plum",
+    "ar": "برقوق",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_180",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sweet cherry",
+    "ar": "كرز حلو",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_181",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sour cherry",
+    "ar": "كرز حامض",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_182",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Almond",
+    "ar": "لوز",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_183",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Strawberry",
+    "ar": "فراولة",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_184",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Raspberry",
+    "ar": "توت العليق",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_185",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Blackberry",
+    "ar": "عليق أسود",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_186",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Loquat",
+    "ar": "بشملة",
+    "family": "Rosaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_187",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Orange",
+    "ar": "برتقال",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_188",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mandarin",
+    "ar": "يوسفي",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_189",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Clementine",
+    "ar": "كلمنتينا",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_190",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lemon",
+    "ar": "ليمون أصفر",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_191",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lime",
+    "ar": "ليمون أخضر",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_192",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Grapefruit",
+    "ar": "جريب فروت",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_193",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pomelo",
+    "ar": "بوميلو",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_194",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Kumquat",
+    "ar": "برتقال ذهبي",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_195",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Citron",
+    "ar": "أترج",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_196",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Bergamot",
+    "ar": "برغموت",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_197",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Yuzu",
+    "ar": "يوزو",
+    "family": "Rutaceae",
+    "cycle": "perennial",
+    "group_en": "Citrus",
+    "group_ar": "موالح",
+    "id": "crop_198",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Ginger",
+    "ar": "زنجبيل",
+    "family": "Zingiberaceae",
+    "cycle": "perennial",
+    "group_en": "Spices",
+    "group_ar": "توابل",
+    "id": "crop_199",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Turmeric",
+    "ar": "كركم",
+    "family": "Zingiberaceae",
+    "cycle": "perennial",
+    "group_en": "Spices",
+    "group_ar": "توابل",
+    "id": "crop_200",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cardamom",
+    "ar": "حبهان",
+    "family": "Zingiberaceae",
+    "cycle": "perennial",
+    "group_en": "Spices",
+    "group_ar": "توابل",
+    "id": "crop_201",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Galangal",
+    "ar": "خولنجان",
+    "family": "Zingiberaceae",
+    "cycle": "perennial",
+    "group_en": "Spices",
+    "group_ar": "توابل",
+    "id": "crop_202",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Date palm",
+    "ar": "نخيل بلح",
+    "family": "Arecaceae",
+    "cycle": "perennial",
+    "group_en": "Palms",
+    "group_ar": "نخيل",
+    "id": "crop_203",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Coconut",
+    "ar": "جوز هند",
+    "family": "Arecaceae",
+    "cycle": "perennial",
+    "group_en": "Palms",
+    "group_ar": "نخيل",
+    "id": "crop_204",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Oil palm",
+    "ar": "نخيل زيت",
+    "family": "Arecaceae",
+    "cycle": "perennial",
+    "group_en": "Palms",
+    "group_ar": "نخيل",
+    "id": "crop_205",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sago palm",
+    "ar": "نخيل ساجو",
+    "family": "Arecaceae",
+    "cycle": "perennial",
+    "group_en": "Palms",
+    "group_ar": "نخيل",
+    "id": "crop_206",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Guava",
+    "ar": "جوافة",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_207",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Feijoa",
+    "ar": "فيجوا",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_208",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Clove",
+    "ar": "قرنفل",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_209",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Allspice",
+    "ar": "بهار حلو",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_210",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Java plum",
+    "ar": "جامون",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_211",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rose apple",
+    "ar": "تفاح وردي",
+    "family": "Myrtaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and spices",
+    "group_ar": "فاكهة وتوابل",
+    "id": "crop_212",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Fig",
+    "ar": "تين",
+    "family": "Moraceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_213",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mulberry",
+    "ar": "توت",
+    "family": "Moraceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_214",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Jackfruit",
+    "ar": "جاك فروت",
+    "family": "Moraceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_215",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Breadfruit",
+    "ar": "فاكهة الخبز",
+    "family": "Moraceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_216",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Mango",
+    "ar": "مانجو",
+    "family": "Anacardiaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and nuts",
+    "group_ar": "فاكهة ومكسرات",
+    "id": "crop_217",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cashew",
+    "ar": "كاجو",
+    "family": "Anacardiaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and nuts",
+    "group_ar": "فاكهة ومكسرات",
+    "id": "crop_218",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pistachio",
+    "ar": "فستق",
+    "family": "Anacardiaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit and nuts",
+    "group_ar": "فاكهة ومكسرات",
+    "id": "crop_219",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Blueberry",
+    "ar": "توت أزرق",
+    "family": "Ericaceae",
+    "cycle": "perennial",
+    "group_en": "Berries",
+    "group_ar": "توتيات",
+    "id": "crop_220",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cranberry",
+    "ar": "توت بري أحمر",
+    "family": "Ericaceae",
+    "cycle": "perennial",
+    "group_en": "Berries",
+    "group_ar": "توتيات",
+    "id": "crop_221",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lingonberry",
+    "ar": "لينجونبيري",
+    "family": "Ericaceae",
+    "cycle": "perennial",
+    "group_en": "Berries",
+    "group_ar": "توتيات",
+    "id": "crop_222",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Lychee",
+    "ar": "ليتشي",
+    "family": "Sapindaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_223",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Longan",
+    "ar": "لونجان",
+    "family": "Sapindaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_224",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Rambutan",
+    "ar": "رامبوتان",
+    "family": "Sapindaceae",
+    "cycle": "perennial",
+    "group_en": "Fruit",
+    "group_ar": "فاكهة",
+    "id": "crop_225",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Banana",
+    "ar": "موز",
+    "family": "Musaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_226",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pineapple",
+    "ar": "أناناس",
+    "family": "Bromeliaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_227",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Papaya",
+    "ar": "بابايا",
+    "family": "Caricaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_228",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Avocado",
+    "ar": "أفوكادو",
+    "family": "Lauraceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_229",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Olive",
+    "ar": "زيتون",
+    "family": "Oleaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_230",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Grape",
+    "ar": "عنب",
+    "family": "Vitaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_231",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Pomegranate",
+    "ar": "رمان",
+    "family": "Lythraceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_232",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Passion fruit",
+    "ar": "باشن فروت",
+    "family": "Passifloraceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_233",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Kiwifruit",
+    "ar": "كيوي",
+    "family": "Actinidiaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_234",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Persimmon",
+    "ar": "كاكا",
+    "family": "Ebenaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_235",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Walnut",
+    "ar": "عين جمل",
+    "family": "Juglandaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_236",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Hazelnut",
+    "ar": "بندق",
+    "family": "Betulaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_237",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sweet potato",
+    "ar": "بطاطا",
+    "family": "Convolvulaceae",
+    "cycle": "annual",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_238",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Cassava",
+    "ar": "كسافا",
+    "family": "Euphorbiaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_239",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Taro",
+    "ar": "قلقاس",
+    "family": "Araceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_240",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Yam",
+    "ar": "يام",
+    "family": "Dioscoreaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_241",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sesame",
+    "ar": "سمسم",
+    "family": "Pedaliaceae",
+    "cycle": "annual",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_242",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Flax",
+    "ar": "كتان",
+    "family": "Linaceae",
+    "cycle": "annual",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_243",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Buckwheat",
+    "ar": "حنطة سوداء",
+    "family": "Polygonaceae",
+    "cycle": "annual",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_244",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Sugar cane",
+    "ar": "قصب سكر",
+    "family": "Poaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_245",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Coffee",
+    "ar": "قهوة",
+    "family": "Rubiaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_246",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Tea",
+    "ar": "شاي",
+    "family": "Theaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_247",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Black pepper",
+    "ar": "فلفل أسود",
+    "family": "Piperaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_248",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Vanilla",
+    "ar": "فانيليا",
+    "family": "Orchidaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_249",
+    "local_suitability": "not_validated"
+  },
+  {
+    "en": "Saffron",
+    "ar": "زعفران",
+    "family": "Iridaceae",
+    "cycle": "perennial",
+    "group_en": "Other crops",
+    "group_ar": "محاصيل متنوعة",
+    "id": "crop_250",
+    "local_suitability": "not_validated"
+  }
+]
