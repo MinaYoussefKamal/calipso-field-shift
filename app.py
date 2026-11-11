@@ -151,24 +151,22 @@ def report():
         st.caption(t('No measured water saving, yield forecast or NASA endorsement is claimed.','مفيش ادعاء بتوفير ميّه مقاس أو توقع إنتاجية أو اعتماد من ناسا.'))
 
 with st.sidebar:
-    st.markdown('''<style>
-[data-testid="stAppViewContainer"] {background:linear-gradient(120deg,rgba(245,248,240,.96),rgba(245,248,240,.88)),url("'''+background+'''") center/cover fixed;color:#173d2a;}
+    st.markdown('## 🌱 FIELD SHIFT')
+    st.radio('Language / اللغة',['en','ar'],key='lang',format_func=lambda x:'🇬🇧 English (UK)' if x=='en' else '🇪🇬 عربي مصري')
+    LANG=st.session_state.lang
+    st.caption(t('Developed by team CALIPSO','اتطوّر بواسطة فريق CALIPSO'))
+page=st.navigation([st.Page(farm,title=t('Your farm','أرضك'),icon='🌱',default=True,url_path='farm'),st.Page(weather,title=t('Climate context','المناخ'),icon='☀️',url_path='climate'),st.Page(compare,title=t('Next crop','المحصول الجاي'),icon='🌾',url_path='crops'),st.Page(report,title=t('My report','تقريري'),icon='📋',url_path='report')])
+background='data:image/jpeg;base64,'+base64.b64encode((ROOT/'assets'/'fields.jpg').read_bytes()).decode()
+direction='rtl' if st.session_state.lang=='ar' else 'ltr'
+st.markdown('''<style>
+[data-testid="stAppViewContainer"] {background:linear-gradient(120deg,rgba(245,248,240,.96),rgba(245,248,240,.88)),url("'''+background+'''") center/cover fixed;}
 [data-testid="stSidebar"]{background:#153e2d;} [data-testid="stSidebar"] *{color:#f0f6e8;}
 .block-container{max-width:1260px;padding-top:2rem;direction:'''+direction+''';} [data-testid="stSidebar"]{direction:'''+direction+''';}
-h1,h2,h3{letter-spacing:-.02em;color:#173d2a;}
-.hero{background:linear-gradient(90deg,rgba(15,49,32,.96),rgba(15,49,32,.3)),url("'''+background+'''") center/cover;border-radius:24px;padding:48px 42px;margin-bottom:30px;color:white;min-height:290px;}
-.hero h1{color:white;font-size:clamp(2rem,4vw,3.5rem);max-width:800px;line-height:1.3;margin:14px 0;}
-.hero p{max-width:680px;color:#e2eddf;font-size:18px;}
-.eyebrow{font-size:12px;font-weight:700;}
-.pill{display:inline-block;padding:8px 12px;border:1px solid #8bad70;border-radius:100px;font-size:11px;margin-top:12px;color:white;}
-.note,.rotation{background:#e7efdd;border:1px solid #d4dfc8;border-radius:20px;padding:24px;margin-bottom:16px;color:#173d2a;}
-.rotation{min-height:205px;}
-.note h2,.rotation h3{color:#153e2d;}
-.note p,.rotation p{color:#173d2a;}
-/* Added rules to target form labels and widget text cleanly */
-[data-testid="stForm"]{background:#ffffffd9;border-radius:20px;padding:24px;color:#173d2a;}
-[data-testid="stForm"] label, [data-testid="stWidgetLabel"] p, .stSelectbox label {color: #173d2a !important; font-weight: 600;}
-button{border-radius:10px!important;}
+h1,h2,h3{letter-spacing:-.02em;}.hero{background:linear-gradient(90deg,rgba(15,49,32,.96),rgba(15,49,32,.3)),url("'''+background+'''") center/cover;border-radius:24px;padding:48px 42px;margin-bottom:30px;color:white;min-height:290px;}
+.hero h1{color:white;font-size:clamp(2rem,4vw,3.5rem);max-width:800px;line-height:1.3;margin:14px 0;}.hero p{max-width:680px;color:#e2eddf;font-size:18px;}
+.eyebrow{font-size:12px;font-weight:700;}.pill{display:inline-block;padding:8px 12px;border:1px solid #8bad70;border-radius:100px;font-size:11px;margin-top:12px;}
+.note,.rotation{background:#e7efdd;border:1px solid #d4dfc8;border-radius:20px;padding:24px;margin-bottom:16px;}.rotation{min-height:205px;}.note h2,.rotation h3{color:#153e2d;}
+[data-testid="stForm"]{background:#ffffffd9;border-radius:20px;padding:24px;}button{border-radius:10px!important;}
 @media(max-width:640px){.hero{padding:28px 22px;min-height:240px;}.block-container{padding:1rem;}}
 </style>''',unsafe_allow_html=True)
 page.run()
