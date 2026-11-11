@@ -180,7 +180,10 @@ h1,h2,h3{{letter-spacing:-.02em;color:#173d2a;}}
 [data-testid="stTable"] th, [data-testid="stTable"] td {{color: #173d2a !important; background-color: #ffffffd9 !important;}}
 .stDataFrame th, .stDataFrame td {{color: #173d2a !important;}}
 button{{border-radius:10px!important;}}
-@media(max-width:640px){.hero{{padding:28px 22px;min-height:240px;}}.block-container{{padding:1rem;}}
+@media(max-width:640px) {{
+  .hero {{padding:28px 22px;min-height:240px;}}
+  .block-container {{padding:1rem;}}
+}}
 </style>''',unsafe_allow_html=True)
 
 page.run()
