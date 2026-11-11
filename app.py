@@ -165,11 +165,9 @@ h1,h2,h3{letter-spacing:-.02em;color:#173d2a;}
 .rotation{min-height:205px;}
 .note h2,.rotation h3{color:#153e2d;}
 .note p,.rotation p{color:#173d2a;}
+/* Added rules to target form labels and widget text cleanly */
 [data-testid="stForm"]{background:#ffffffd9;border-radius:20px;padding:24px;color:#173d2a;}
 [data-testid="stForm"] label, [data-testid="stWidgetLabel"] p, .stSelectbox label {color: #173d2a !important; font-weight: 600;}
-/* Explicitly style st.table and dataframes for clear contrast */
-[data-testid="stTable"] th, [data-testid="stTable"] td {color: #173d2a !important; background-color: #ffffffd9 !important;}
-.stDataFrame th, .stDataFrame td {color: #173d2a !important;}
 button{border-radius:10px!important;}
 @media(max-width:640px){.hero{padding:28px 22px;min-height:240px;}.block-container{padding:1rem;}}
 </style>''',unsafe_allow_html=True)
