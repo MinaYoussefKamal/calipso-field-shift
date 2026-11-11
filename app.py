@@ -151,14 +151,7 @@ def report():
         st.caption(t('No measured water saving, yield forecast or NASA endorsement is claimed.','مفيش ادعاء بتوفير ميّه مقاس أو توقع إنتاجية أو اعتماد من ناسا.'))
 
 with st.sidebar:
-    st.markdown('## 🌱 FIELD SHIFT')
-    st.radio('Language / اللغة',['en','ar'],key='lang',format_func=lambda x:'🇬🇧 English (UK)' if x=='en' else '🇪🇬 عربي مصري')
-    LANG=st.session_state.lang
-    st.caption(t('Developed by team CALIPSO','اتطوّر بواسطة فريق CALIPSO'))
-page=st.navigation([st.Page(farm,title=t('Your farm','أرضك'),icon='🌱',default=True,url_path='farm'),st.Page(weather,title=t('Climate context','المناخ'),icon='☀️',url_path='climate'),st.Page(compare,title=t('Next crop','المحصول الجاي'),icon='🌾',url_path='crops'),st.Page(report,title=t('My report','تقريري'),icon='📋',url_path='report')])
-background='data:image/jpeg;base64,'+base64.b64encode((ROOT/'assets'/'fields.jpg').read_bytes()).decode()
-direction='rtl' if st.session_state.lang=='ar' else 'ltr'
-st.markdown('''<style>
+    st.markdown('''<style>
 [data-testid="stAppViewContainer"] {background:linear-gradient(120deg,rgba(245,248,240,.96),rgba(245,248,240,.88)),url("'''+background+'''") center/cover fixed;color:#173d2a;}
 [data-testid="stSidebar"]{background:#153e2d;} [data-testid="stSidebar"] *{color:#f0f6e8;}
 .block-container{max-width:1260px;padding-top:2rem;direction:'''+direction+''';} [data-testid="stSidebar"]{direction:'''+direction+''';}
@@ -172,9 +165,11 @@ h1,h2,h3{letter-spacing:-.02em;color:#173d2a;}
 .rotation{min-height:205px;}
 .note h2,.rotation h3{color:#153e2d;}
 .note p,.rotation p{color:#173d2a;}
-/* Added rules to target form labels and widget text cleanly */
 [data-testid="stForm"]{background:#ffffffd9;border-radius:20px;padding:24px;color:#173d2a;}
 [data-testid="stForm"] label, [data-testid="stWidgetLabel"] p, .stSelectbox label {color: #173d2a !important; font-weight: 600;}
+/* Explicitly style st.table and dataframes for clear contrast */
+[data-testid="stTable"] th, [data-testid="stTable"] td {color: #173d2a !important; background-color: #ffffffd9 !important;}
+.stDataFrame th, .stDataFrame td {color: #173d2a !important;}
 button{border-radius:10px!important;}
 @media(max-width:640px){.hero{padding:28px 22px;min-height:240px;}.block-container{padding:1rem;}}
 </style>''',unsafe_allow_html=True)
