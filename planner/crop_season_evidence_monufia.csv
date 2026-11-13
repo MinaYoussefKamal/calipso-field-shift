@@ -1,0 +1,11 @@
+crop,slot,model_sow,model_days,model_end,n_seasons,hot_days_35,hot_days_40,tmax_mean_c,rain_mm,greenness,sm_surface,sm_rootzone,n_seasons_sm
+wheat,winter,15 Nov,150,13 Apr,14,1.9,0.1,23.3,68.1,0.683,0.07,0.123,10
+berseem,winter,01 Nov,180,29 Apr,14,5.7,0.6,24.5,81.8,0.659,0.069,0.122,10
+faba_bean,winter,01 Nov,140,20 Mar,14,0.4,0.0,23.0,62.2,0.697,0.072,0.122,10
+sugar_beet,winter,15 Oct,195,27 Apr,14,6.1,0.6,25.0,86.1,0.649,0.068,0.121,10
+potato,winter,01 Dec,130,09 Apr,14,1.8,0.1,22.9,51.8,0.687,0.071,0.123,10
+onion,winter,20 Nov,160,28 Apr,14,5.3,0.6,24.0,76.8,0.665,0.069,0.122,10
+maize,summer,15 May,125,16 Sep,14,116.3,42.4,38.9,2.0,0.528,0.048,0.114,10
+cotton,summer,15 Mar,195,25 Sep,14,134.3,44.9,36.1,24.6,0.523,0.051,0.116,9
+soybean,summer,20 May,125,21 Sep,14,117.7,42.1,39.0,2.0,0.528,0.048,0.114,10
+sesame,summer,15 May,105,27 Aug,14,96.6,39.2,39.1,1.9,0.574,0.048,0.114,10
