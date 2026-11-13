@@ -2,7 +2,7 @@
 
 Pages
   1. Your plans     - the farmer enters his summer crop, winter crop and goal; three plans come back (A, B, C).
-  2. NASA evidence  - monthly weather and greenness for Monufia, from the files shipped in planner/.
+  2. Statistical information - monthly weather and greenness for Monufia (NASA data), from the files shipped in planner/.
   3. How it works   - the rules, the data, and what the tool cannot do.
 
 The plan engine (planner/rotation_engine.py) is a written-rules "expert system", not machine learning.
@@ -200,7 +200,7 @@ def plans() -> None:
                        file_name="field-shift-monufia-plans.txt", mime="text/plain", type="primary")
 
 
-# ---------------------------------------------------------------- page 2: NASA evidence
+# ---------------------------------------------------------------- page 2: statistical information
 GREEN, BROWN = "#1f8a4c", "#c2571a"  # checked with the colour validator (green/brown pair, brown line is dashed)
 
 
@@ -247,7 +247,7 @@ def evidence() -> None:
     raw = load_profile().copy()
     raw["month"] = raw["month"].astype(int)
     period = str(raw["period"].iloc[0]).replace("-", "–")
-    hero(t("NASA EVIDENCE", "أدلة ناسا"),
+    hero(t("STATISTICAL INFORMATION", "معلومات إحصائية"),
          t("What NASA records say about Monufia", "إيه اللي بتقوله سجلات ناسا عن المنوفية"),
          t(f"Monthly averages for {period} for one area around Monufia. They describe the zone, not your field.",
            f"متوسطات شهرية من {period} لمنطقة واحدة حوالين المنوفية. بتوصف المنطقة، مش حقلك."))
@@ -379,7 +379,7 @@ with st.sidebar:
 
 page = st.navigation([
     st.Page(plans, title=t("Your plans", "خططك"), icon="🌱", default=True, url_path="plan"),
-    st.Page(evidence, title=t("NASA evidence", "أدلة ناسا"), icon="🛰️", url_path="evidence"),
+    st.Page(evidence, title=t("Statistical information", "معلومات إحصائية"), icon="📊", url_path="statistics"),
     st.Page(about, title=t("How it works", "إزاي بتشتغل"), icon="📖", url_path="about"),
 ])
 
@@ -392,7 +392,9 @@ st.markdown(f'''<style>
 [data-testid="stSidebar"]{{background:#153e2d;}} [data-testid="stSidebar"] *{{color:#f0f6e8;}}
 .block-container{{max-width:1260px;padding-top:2rem;direction:{direction};}} [data-testid="stSidebar"]{{direction:{direction};}}
 h1,h2,h3{{letter-spacing:-.02em;color:#173d2a;}}
-[data-testid="stHeading"], [data-testid="stCaptionContainer"] {{text-align:{align};}}
+[data-testid="stHeading"], [data-testid="stCaptionContainer"], .block-container [data-testid="stMarkdownContainer"],
+.block-container p, .block-container ul, .block-container ol, .block-container li, .block-container [data-testid="stAlert"] {{text-align:{align} !important;}}
+.block-container ul, .block-container ol {{padding-inline-start:1.6rem;}}
 .hero{{background:linear-gradient(90deg,rgba(15,49,32,.96),rgba(15,49,32,.3)),url("{background}") center/cover;border-radius:24px;padding:48px 42px;margin-bottom:30px;color:white;min-height:290px;}}
 .hero h1{{color:white;font-size:clamp(2rem,4vw,3.5rem);max-width:800px;line-height:1.3;margin:14px 0;}}
 .hero p{{max-width:680px;color:#e2eddf;font-size:18px;}}
