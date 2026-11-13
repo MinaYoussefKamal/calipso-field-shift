@@ -152,6 +152,17 @@ class Pages(unittest.TestCase):
         # no millimetre irrigation amounts anywhere: water is shown as a relative number only
         self.assertNotIn("irrigation amount of", text.lower())
 
+    def test_second_tab_is_called_statistical_information_in_both_languages(self):
+        source = (ROOT / "app.py").read_text(encoding="utf-8")
+        # the menu entry (the navigation bar is drawn by the browser, so it is checked in the source)
+        self.assertIn('title=t("Statistical information", "معلومات إحصائية")', source)
+        self.assertNotIn('title=t("NASA evidence"', source)
+        # the heading label on the page itself, in both languages
+        self.assertIn('class="eyebrow">STATISTICAL INFORMATION<', all_text(run_app("en", "evidence")))
+        self.assertIn('class="eyebrow">معلومات إحصائية<', all_text(run_app("ar", "evidence")))
+        for lang in ("en", "ar"):
+            self.assertNotIn("NASA EVIDENCE", all_text(run_app(lang, "evidence")))
+
     def test_about_page_numbers_match_the_engine(self):
         text = all_text(run_app("en", "about"))
         self.assertIn(f"{len(ENG.pairs)} yearly plans", text)
