@@ -1,191 +1,428 @@
+"""Field Shift · Monufia: a crop-rotation planner built on NASA data (team CALIPSO).
+
+Pages
+  1. Your plans     - the farmer enters his summer crop, winter crop and goal; three plans come back (A, B, C).
+  2. NASA evidence  - monthly weather and greenness for Monufia, from the files shipped in planner/.
+  3. How it works   - the rules, the data, and what the tool cannot do.
+
+The plan engine (planner/rotation_engine.py) is a written-rules "expert system", not machine learning.
+The sentences (planner/explainer.py) are pre-written recipes filled with the engine's numbers, in English and
+Egyptian Arabic. No live AI, no live API: every number on the site comes from the files in planner/.
+"""
+from __future__ import annotations
+
+import base64
+import calendar
+import html
+import sys
 from pathlib import Path
-from datetime import date
-import base64,calendar,json,html
+
+import altair as alt
 import pandas as pd
-import requests
 import streamlit as st
-from rotation import CROPS,BY_ID,BY_NAME,assess,shortlist
 
-ROOT=Path(__file__).parent
-st.set_page_config(page_title='Field Shift · CALIPSO',page_icon='🌱',layout='wide')
-if 'lang' not in st.session_state: st.session_state.lang='en'
-LANG=st.session_state.lang
-def t(en,ar): return ar if LANG=='ar' else en
-def crop_name(cid): return BY_ID[cid][LANG]
-REGIONS={'tanta':('Tanta, Gharbia','طنطا، الغربية',30.7865,31.0004),'mansoura':('Mansoura, Dakahlia','المنصورة، الدقهلية',31.0409,31.3785),'damanhur':('Damanhur, Beheira','دمنهور، البحيرة',31.0364,30.4691)}
-SOILS={'clay':('Clay','طينية'),'loam':('Loam','طميية'),'sand':('Sandy','رملية'),'unknown':('Unknown','مش معروف')}
-PRIORITIES={'water':('Saving water','توفير الميّه'),'soil':('Soil health','صحة التربة'),'balanced':('Balanced planning','تخطيط متوازن')}
-MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
-def month_name(m): return t(calendar.month_name[m],MONTHS[m-1])
-DEFAULT=dict(region='tanta',soil='clay',current=BY_NAME['Wheat']['id'],desired=BY_NAME['Faba bean']['id'],priority='water',month=11)
-if 'profile' not in st.session_state:st.session_state.profile=DEFAULT.copy()
+ROOT = Path(__file__).parent
+PLANNER = ROOT / "planner"
+sys.path.insert(0, str(PLANNER))
+import explainer as ex  # noqa: E402
+import plan_text  # noqa: E402
+import price_cards as pc  # noqa: E402
+from rotation_engine import GOALS, Engine  # noqa: E402
 
-def hero(label,title,body):
-    st.markdown(f'<div class="hero"><div class="eyebrow">{html.escape(label)}</div><h1>{html.escape(title)}</h1><p>{html.escape(body)}</p><span class="pill">{t("RESEARCH PROTOTYPE","نموذج تجريبي")} · CALIPSO</span></div>',unsafe_allow_html=True)
+st.set_page_config(page_title="Field Shift · Monufia", page_icon="🌱", layout="wide")
 
-def field_select(label,options,value,fmt=lambda x:x):
-    return st.selectbox(label,options,index=options.index(value),format_func=fmt)
+# ---------------------------------------------------------------- language
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
+LANG = st.session_state.lang
 
-def status_text(status):
-    return {'perennial':t('Separate perennial-crop assessment needed','محتاج تقييم خاص بالمحاصيل المعمرة'),'repeat':t('Same crop again — rotation break absent','نفس المحصول تاني — مفيش تغيير في الدورة'),'same_family':t('Same plant family — review shared pest risks','نفس العيلة النباتية — راجع مخاطر الآفات المشتركة'),'different_family':t('Different plant family — candidate for review','عيلة نباتية مختلفة — بديل يستحق المراجعة')}[status]
 
-def advice(status):
-    return {'perennial':t('Trees and perennial crops need a separate establishment or replanting plan. This seasonal screening cannot decide whether to remove or replace them. Review root residues, replant diseases, land preparation and the establishment period with an agronomist.','الأشجار والمحاصيل المعمرة محتاجة خطة تأسيس أو إعادة زراعة خاصة. الفحص الموسمي ده ما يقدرش يقرر إزالتها أو استبدالها. راجع بقايا الجذور وأمراض إعادة الزراعة وتجهيز الأرض وفترة التأسيس مع مهندس زراعي.'),'repeat':t('Do not treat repeating the crop as a rotation break. Discuss a different-family break crop, review the field disease history, and verify local planting dates before sowing the preferred crop. No safe waiting period can be set from the crop name alone.','تكرار نفس المحصول مش فاصل في الدورة. ناقش محصول فاصل من عيلة مختلفة، وراجع تاريخ أمراض الأرض ومواعيد الزراعة المحلية قبل زراعة المحصول اللي عايزه. اسم المحصول لوحده مش كفاية لتحديد فترة انتظار آمنة.'),'same_family':t('Changing the crop name does not necessarily break a shared pest or disease cycle. Discuss an appropriate different-family break and the disease-specific interval with an agronomist. A generic one-season gap is not a guarantee.','تغيير اسم المحصول مش بالضرورة بيكسر دورة الآفات أو الأمراض المشتركة. ناقش محصول فاصل مناسب من عيلة مختلفة والفاصل الزمني المطلوب حسب المرض مع مهندس زراعي. موسم واحد مش ضمان.'),'different_family':t('This passes the family-diversity screen only. Before planting, confirm the local sowing window, soil test and drainage, irrigation supply, crop duration, and pest history. Different families can still share pests.','ده اجتاز فحص تنويع العيلة النباتية بس. قبل الزراعة، اتأكد من ميعاد الزراعة المحلي وتحليل التربة والصرف وتوفر الري ومدة المحصول وتاريخ الآفات. عيلتين مختلفتين ممكن برضه يشتركوا في آفات.')}[status]
+def t(en: str, ar: str) -> str:
+    return ar if LANG == "ar" else en
 
-def priority_note(p):
-    return {'water':t('Water-saving options cannot be ranked yet: irrigation demand has not been calculated. The list is alphabetical, not a water-use ranking.','لسه ما ينفعش نرتب البدائل حسب توفير الميّه: احتياجات الري مش محسوبة. ترتيب القايمة أبجدي بالاسم الإنجليزي، مش ترتيب استهلاك ميّه.'),'soil':t('Legumes appear first as a soil-health exploration preference, then alphabetical order. This does not establish a nitrogen benefit, disease safety or the best crop.','البقوليات بتظهر الأول كاختيار للاستكشاف المرتبط بصحة التربة، وبعدها ترتيب أبجدي بالاسم الإنجليزي. ده مش إثبات لتحسين النيتروجين أو الأمان من الأمراض أو إن ده أفضل محصول.'),'balanced':t('Different-family candidates are shown alphabetically. No combined suitability score or best crop is claimed.','البدائل من عيلة مختلفة ظاهرة بترتيب أبجدي بالاسم الإنجليزي. مفيش درجة ملاءمة شاملة أو ادعاء إن محصول هو الأفضل.')}[p]
 
-def farm():
-    hero(t('YOUR FARM','أرضك'),t('Every field has a next chapter.','كل أرض ليها زرعة جاية.'),t('Your current crop. Your next choice. A clearer view of what needs checking.','محصولك الحالي، واختيارك الجاي، وصورة أوضح للحاجات اللي محتاجة تتراجع.'))
-    left,right=st.columns([1.65,1],gap='large')
+def esc(s: str) -> str:
+    return html.escape(str(s))
+
+
+# ---------------------------------------------------------------- data
+@st.cache_resource(show_spinner=False)
+def get_engine() -> Engine:
+    return Engine()
+
+
+@st.cache_data(show_spinner=False)
+def load_profile() -> pd.DataFrame:
+    return pd.read_csv(PLANNER / "monufia_month_profile.csv")
+
+
+ENG = get_engine()
+SUMMER = list(dict.fromkeys(ENG.pairs["summer"]))
+WINTER = list(dict.fromkeys(ENG.pairs["winter"]))
+MONTH_ABBR = list(calendar.month_abbr)[1:]
+
+
+def crop_label(c: str) -> str:
+    return plan_text.crop_label(c, LANG)
+
+
+def month_label(m: int) -> str:
+    """m = 1..12"""
+    return ex.MONTH_AR[MONTH_ABBR[m - 1]] if LANG == "ar" else calendar.month_name[m]
+
+
+def join_names(names: list[str]) -> str:
+    if len(names) == 1:
+        return names[0]
+    if LANG == "ar":
+        return "، ".join(names[:-1]) + " و" + names[-1]
+    return ", ".join(names[:-1]) + " and " + names[-1]
+
+
+DEFAULT_PROFILE = dict(summer="maize", winter="wheat", goal="save_water", main_only=True)
+if "profile" not in st.session_state:
+    st.session_state.profile = DEFAULT_PROFILE.copy()
+
+
+# ---------------------------------------------------------------- small pieces
+def hero(label: str, title: str, body: str) -> None:
+    st.markdown(
+        f'<div class="hero"><div class="eyebrow">{esc(label)}</div><h1>{esc(title)}</h1><p>{esc(body)}</p>'
+        f'<span class="pill">{t("RESEARCH PROTOTYPE", "نموذج تجريبي")} · CALIPSO</span></div>',
+        unsafe_allow_html=True)
+
+
+def bullets(items: list[str]) -> None:
+    if items:
+        st.markdown("\n".join(f"- {s}" for s in items))
+
+
+def mark_bar(label: str, value: float, is_goal: bool) -> str:
+    v = ex._r(value)
+    cls = "fill goal" if is_goal else "fill"
+    return (f'<div class="mark"><div class="mrow"><span>{esc(label)}</span>'
+            f'<b><bdi dir="ltr">{v}/100</bdi></b></div>'
+            f'<div class="track"><div class="{cls}" style="width:{max(0, min(100, v))}%"></div></div></div>')
+
+
+def plan_card(tag: str, o: dict, r: dict, ui: dict, goal: str, summer: str, winter: str) -> None:
+    sc = r["scores"]
+    goal_key = {"save_money": "money", "save_water": "water", "improve_soil": "soil"}[goal]
+    with st.container(border=True, key=f"plan_{tag}"):
+        st.markdown(
+            f'<div class="role role-{tag}">{esc(ui["plan"])} {tag} · {esc(o["role"])}</div>'
+            f'<h3 class="ptitle">{esc(o["title"])}</h3>'
+            f'<div class="goalmark"><span>{esc(ui["marks"]["goal"])}</span>'
+            f'<b><bdi dir="ltr">{ex._r(sc["goal"])}<small>/100</small></bdi></b></div>'
+            + mark_bar(ui["marks"]["water"], sc["water"], goal_key == "water")
+            + mark_bar(ui["marks"]["soil"], sc["soil"], goal_key == "soil")
+            + mark_bar(ui["marks"]["money"], sc["money_saving_proxy"], goal_key == "money")
+            + f'<div class="heat">{esc(ui["marks"]["heat"])}: <b>{esc(ui["tier"][sc["heat_level"]])}</b></div>',
+            unsafe_allow_html=True)
+
+        st.markdown(f'**{ui["why"]}**')
+        st.markdown(o["why"]["goal"])
+        st.markdown(o["why"]["water"])
+        st.markdown(o["why"]["soil"])
+
+        if o["benefits"]:
+            st.markdown(f'**{ui["benefits"]}**')
+            bullets(o["benefits"])
+        if o["trade_offs"]:
+            st.markdown(f'**{ui["trade_offs"]}**')
+            bullets(o["trade_offs"])
+        for w in o["warnings"]:
+            st.warning(w)
+
+        with st.expander(ui["evidence"]):
+            bullets(o["evidence"])
+            st.caption(o["evidence_source"])
+        with st.expander(pc.TITLE[LANG]):
+            for c in (summer, winter):
+                st.markdown(f"**{crop_label(c)}**")
+                bullets(pc.lines(c, LANG))
+            st.caption(pc.SOURCE_NOTE[LANG])
+        with st.expander(ui["gaps"]):
+            bullets(o["information_gaps"])
+        with st.expander(ui["risks"]):
+            bullets(o["risks_for_local_review"])
+
+
+# ---------------------------------------------------------------- page 1: your plans
+def plans() -> None:
+    hero(t("MONUFIA · YOUR ROTATION", "المنوفية · دورتك الزراعية"),
+         t("Which crops should follow each other on your land?", "إيه المحاصيل اللي تيجي ورا بعض في أرضك؟"),
+         t("Tell us what you grow now and what you want most. NASA data and simple written rules show three plans side by side.",
+           "قولنا بتزرع إيه دلوقتي وإيه أهم حاجة عندك. بيانات ناسا وقواعد مكتوبة بسيطة بتعرض لك تلات خطط جنب بعض."))
+    ui0 = ex.UI[LANG]
+    prof = st.session_state.profile
+    # Widget keys carry the language: when the language changes the widgets are rebuilt, so the drop-downs show
+    # the new language (otherwise the browser keeps the old text). Widgets also forget their value when you
+    # leave the page, so the choice is restored from the saved profile.
+    wk = {k: f"w_{k}_{LANG}" for k in DEFAULT_PROFILE}
+    for k in DEFAULT_PROFILE:
+        if wk[k] not in st.session_state:
+            st.session_state[wk[k]] = prof[k]
+
+    left, right = st.columns([1.65, 1], gap="large")
     with left:
-        st.subheader(t('Tell us about your field','عرّفنا بأرضك'))
-        f=st.session_state.profile
-        with st.form('profile_form'):
-            region=field_select(t('Location','المكان'),list(REGIONS),f['region'],lambda x:t(*REGIONS[x][:2]))
-            soil=field_select(t('Soil type','نوع التربة'),list(SOILS),f['soil'],lambda x:t(*SOILS[x]))
-            current=field_select(t('Current / most recent crop','المحصول الموجود / آخر محصول'),list(BY_ID),f['current'],crop_name)
-            desired=field_select(t('Crop you would like to grow','المحصول اللي نفسك تزرعه'),list(BY_ID),f['desired'],crop_name)
-            priority=field_select(t('Your priority','إيه أولويتك؟'),list(PRIORITIES),f['priority'],lambda x:t(*PRIORITIES[x]))
-            month=field_select(t('Proposed planting month','شهر الزراعة المقترح'),list(range(1,13)),f['month'],month_name)
-            if st.form_submit_button(t('Save my field','احفظ بيانات أرضي'),type='primary',width='stretch'):
-                st.session_state.profile=dict(region=region,soil=soil,current=current,desired=desired,priority=priority,month=month)
-                st.success(t('Saved. Your crop comparison now uses this profile.','اتحفظت. مقارنة المحاصيل دلوقتي بتستخدم البيانات دي.'))
+        st.subheader(t("Your rotation now", "دورتك دلوقتي"))
+        st.caption(t("One summer crop and one winter crop, in one year.", "محصول صيفي ومحصول شتوي في السنة."))
+        c1, c2 = st.columns(2)
+        summer = c1.selectbox(t("Summer crop", "المحصول الصيفي"), SUMMER, format_func=crop_label, key=wk["summer"])
+        winter = c2.selectbox(t("Winter crop", "المحصول الشتوي"), WINTER, format_func=crop_label, key=wk["winter"])
+        goal = st.radio(t("What do you want most?", "إيه أهم حاجة عندك؟"), list(GOALS),
+                        format_func=lambda g: ui0["goals"][g], horizontal=True, key=wk["goal"])
+        main_only = st.checkbox(
+            ui0["main_only_box"], key=wk["main_only"],
+            help=t("Soybean and sesame are grown by few farmers here. Untick to include them in plans B and C.",
+                   "الصويا والسمسم قليل اللي بيزرعهم هنا. شيل العلامة عشان يدخلوا في الخطتين B وC."))
     with right:
-        st.markdown(f'<div class="note"><div class="eyebrow">CALIPSO · FIELD SHIFT</div><h2>{t("Better questions. Clearer choices.","أسئلة أوضح، واختيارات مدروسة.")}</h2><p>{t("Explore what could follow your current crop, or check a crop you already have in mind.","شوف إيه ممكن ييجي بعد محصولك الحالي، أو افحص محصول إنت محدده من الأول.")}</p></div>',unsafe_allow_html=True)
-        st.metric(t('Crop entries in the catalogue','محصول ونوع زراعي في الدليل'),len(CROPS))
-        st.caption(t('A worldwide catalogue including crop types and perennials; not 250 validated choices for Egypt. Local suitability is not established.','دليل عالمي فيه أنواع زراعية ومحاصيل معمرة؛ مش 250 اختيار معتمد للزراعة في مصر. الملاءمة المحلية لسه مش مثبتة.'))
-    with st.expander(t('Browse the crop catalogue','تصفّح دليل المحاصيل')):
-        search=st.text_input(t('Search in English or Arabic','دوّر بالإنجليزي أو بالعربي'))
-        filtered=[c for c in CROPS if search.casefold() in (c['en']+' '+c['ar']).casefold()]
-        st.caption(t(f'{len(filtered)} matching entries',f'{len(filtered)} نتيجة'))
-        st.dataframe(pd.DataFrame([{t('Crop','المحصول'):c[st.session_state.lang],t('English name','الاسم الإنجليزي'):c['en'],t('Group','المجموعة'):c['group_'+st.session_state.lang],t('Plant family','العيلة النباتية'):c['family']} for c in filtered]),hide_index=True,width='stretch')
+        st.markdown(
+            f'<div class="note"><div class="eyebrow">CALIPSO · FIELD SHIFT</div>'
+            f'<h2>{t("Three plans, one page.", "تلات خطط في صفحة واحدة")}</h2>'
+            f'<p>{t("Plan A is what you grow now. Plan B is the best plan for your goal. Plan C is the best plan for your goal that also keeps the soil healthy.", "الخطة A هي اللي بتزرعه دلوقتي. الخطة B أحسن خطة لهدفك. الخطة C أحسن خطة لهدفك وكمان بتحافظ على التربة.")}</p></div>',
+            unsafe_allow_html=True)
+    prof.update(summer=summer, winter=winter, goal=goal, main_only=main_only)
 
-@st.cache_data(ttl=86400,show_spinner=False)
-def climate(lat,lon,year):
-    r=requests.get('https://power.larc.nasa.gov/api/temporal/daily/point',params=dict(parameters='T2M,PRECTOTCORR',community='AG',latitude=lat,longitude=lon,start=f'{year}0101',end=f'{year}1231',format='JSON'),timeout=45)
-    r.raise_for_status(); raw=r.json()['properties']['parameter']
-    df=pd.DataFrame(raw).apply(pd.to_numeric,errors='coerce').replace(-999,float('nan'))
-    df.index=pd.to_datetime(df.index,format='%Y%m%d')
-    df=df.reindex(pd.date_range(f'{year}-01-01',f'{year}-12-31'))
-    if not {'T2M','PRECTOTCORR'}.issubset(df.columns) or df.dropna(how='all').empty: raise ValueError('No data')
-    return df,r.url
+    res = ENG.recommend(summer, winter, goal, main_crops_only=main_only)
+    out = ex.explain(ENG, res, LANG)
+    ui = out["ui"]
 
-def weather():
-    hero(t('CLIMATE CONTEXT','المناخ'),t('A clearer picture of the season.','صورة أوضح عن الموسم.'),t('Historical NASA POWER records, with their limitations in view.','بيانات NASA POWER التاريخية، مع توضيح حدود استخدامها.'))
-    f=st.session_state.profile; region=REGIONS[f['region']]
-    st.caption(t(*region[:2])+t(' · Regional reference point, not field measurements',' · نقطة مرجعية للمنطقة، مش قياس مباشر لأرضك'))
-    year=st.selectbox(t('Historical year','السنة'),list(range(date.today().year-1,2014,-1)))
-    if st.button(t('Load NASA data','حمّل بيانات ناسا'),type='primary'):
-        try:
-            with st.spinner(t('Loading climate records…','بنحمّل بيانات المناخ…')): df,url=climate(region[2],region[3],year)
-            st.session_state.weather=(df,url,f['region'],year)
-        except (requests.RequestException,ValueError,KeyError):
-            st.error(t('Data could not be loaded. Please try again. No substitute values have been generated.','البيانات ما اتحمّلتش. جرّب تاني. مفيش أرقام بديلة اتولدت.'))
-    data=st.session_state.get('weather')
-    if data and data[2:]==(f['region'],year):
-        df,url,_,_=data
-        a,b=st.columns(2)
-        a.metric(t('Temperature coverage','اكتمال بيانات الحرارة'),f'{df.T2M.notna().mean():.0%}')
-        b.metric(t('Precipitation coverage','اكتمال بيانات المطر'),f'{df.PRECTOTCORR.notna().mean():.0%}')
-        means=df.T2M.resample('MS').mean()
-        rain=df.PRECTOTCORR.resample('MS').apply(lambda s:s.sum() if s.notna().all() else float('nan'))
-        a,b=st.columns(2)
-        with a:
-            st.subheader(t('Mean temperature · °C','متوسط الحرارة · °م'));st.line_chart(means.rename(t('Temperature','الحرارة')),color='#23734d')
-        with b:
-            st.subheader(t('Monthly precipitation · mm','المطر الشهري · مم'));st.bar_chart(rain.rename(t('Precipitation','المطر')),color='#77a862')
-        st.caption(t('Incomplete monthly rainfall totals are omitted; temperature means use available days. These are historical records, not a forecast.','إجمالي المطر للشهور الناقصة مش بيتعرض؛ متوسط الحرارة بيستخدم الأيام المتاحة. دي بيانات تاريخية، مش توقعات.'))
-        st.link_button(t('Original NASA response','البيانات الأصلية من ناسا'),url)
-        st.download_button(t('Download daily CSV','نزّل البيانات اليومية CSV'),df.to_csv(),'field-shift-climate.csv','text/csv')
-    else:st.info(t('Choose a year and load the data to display real charts.','اختار سنة وحمّل البيانات علشان الرسوم الحقيقية تظهر.'))
-    st.caption(t('Climate records provide context only. They do not currently determine crop suitability or irrigation demand.','بيانات المناخ هنا للسياق بس. حاليًا مش بتحدد ملاءمة المحصول أو احتياجات الري.'))
+    st.subheader(ui["intro_title"])
+    st.write(out["intro"])
+    for tag, col in zip("ABC", st.columns(3, gap="medium")):
+        with col:
+            plan_card(tag, out[tag], res[tag], ui, goal, summer, winter)
+    st.info(out["disclaimer"])
+    st.download_button(t("Download my plans (text file)", "نزّل خططي (ملف نصي)"),
+                       plan_text.build(out, res, summer, winter, LANG).encode("utf-8-sig"),
+                       file_name="field-shift-monufia-plans.txt", mime="text/plain", type="primary")
 
-def compare():
-    hero(t('YOUR NEXT CROP','محصولك الجاي'),t('What comes after your current crop?','تزرع إيه بعد محصولك الحالي؟'),t('Explore a shortlist or check your preferred crop against a transparent family-based screen.','استكشف بدائل، أو افحص المحصول اللي عايزه حسب قاعدة واضحة لتغيير العيلة النباتية.'))
-    f=st.session_state.profile
-    c1,c2=st.columns(2)
-    with c1:current=field_select(t('Current crop','المحصول الحالي'),list(BY_ID),f['current'],crop_name)
-    with c2:desired=field_select(t('Preferred next crop','المحصول المطلوب بعده'),list(BY_ID),f['desired'],crop_name)
-    f['current']=current;f['desired']=desired
-    priority=field_select(t('Comparison priority','أولوية المقارنة'),list(PRIORITIES),f['priority'],lambda x:t(*PRIORITIES[x]));f['priority']=priority
-    tab1,tab2=st.tabs([t('Explore alternatives','شوف البدائل'),t('I want this crop','أنا عايز المحصول ده')])
-    with tab1:
-        st.subheader(t('A starting shortlist, not a confirmed best crop','بدائل كبداية، مش حكم نهائي بأفضل محصول'))
-        options=shortlist(current,priority)
-        st.info(priority_note(priority))
-        if not options:st.warning(advice('perennial'))
-        for start in range(0,len(options),3):
-            for col,c in zip(st.columns(3),options[start:start+3]):
-                with col:
-                    st.markdown(f'<div class="rotation"><div class="eyebrow">{t("CANDIDATE TO REVIEW","بديل للمراجعة")}</div><h3>{html.escape(c[st.session_state.lang])}</h3><p>{html.escape(c["family"])}</p><p>{t("Different family from your current crop.","عيلة مختلفة عن محصولك الحالي.")}</p></div>',unsafe_allow_html=True)
-                    if st.button(t('Check this crop','افحص المحصول ده'),key='pick_'+c['id']):
-                        f['desired']=c['id'];st.rerun()
-        st.caption(t('Shortlist: screened from a 30-crop working set. The full 250-entry catalogue is searchable and available for preferred-crop checks. Region, soil, planting month, climate and water supply are not yet suitability filters.','البدائل متفلترة من مجموعة عمل فيها 30 محصول. الدليل الكامل فيه 250 مدخل للبحث وفحص المحصول المطلوب. المنطقة والتربة وشهر الزراعة والمناخ وتوفر الميّه لسه مش فلاتر للملاءمة.'))
-    with tab2:
-        result=assess(current,desired)
-        st.subheader(crop_name(current)+' → '+crop_name(desired))
-        st.warning(status_text(result))
-        st.write(advice(result))
-        st.write(t('**Plant families:** ','**العائلات النباتية:** ')+BY_ID[current]['family']+' → '+BY_ID[desired]['family'])
-        if result in ['same_family','repeat']:
-            alternatives=shortlist(current,priority)[:3]
-            st.write(t('**Different-family crops to discuss:** ','**بدائل من عيلة مختلفة تناقشها:** ')+ '، '.join(c[st.session_state.lang] for c in alternatives))
-        st.caption(t('No crop-specific fertiliser dose, pesticide treatment, irrigation amount or waiting period is prescribed by this screen.','الفحص ده ما بيحددش جرعات سماد أو مبيدات أو كمية ري أو فترة انتظار خاصة بالمحصول.'))
 
-def report():
-    hero(t('YOUR REPORT','تقريرك'),t('Keep the evidence with the decision.','خلّي الدليل جنب القرار.'),t('Your saved field profile, crop screen and source references.','بيانات أرضك، وفحص المحاصيل، والمصادر المستخدمة.'))
-    f=st.session_state.profile; result=assess(f['current'],f['desired'])
-    a,b=st.columns([1.3,1])
-    with a:
-        st.subheader(t('Field summary','ملخص الأرض'))
-        rows=[(t('Location','المكان'),t(*REGIONS[f['region']][:2])),(t('Soil','التربة'),t(*SOILS[f['soil']])),(t('Current crop','المحصول الحالي'),crop_name(f['current'])),(t('Preferred crop','المحصول المطلوب'),crop_name(f['desired'])),(t('Priority','الأولوية'),t(*PRIORITIES[f['priority']])),(t('Proposed month','الشهر المقترح'),month_name(f['month']))]
-        st.table(pd.DataFrame(rows,columns=[t('Field','البند'),t('Value','القيمة')]))
-        st.write(status_text(result))
-        brief={'developed_by':'CALIPSO','language':st.session_state.lang,'profile':dict(rows),'screen':status_text(result),'explanation':advice(result),'candidates':[c[st.session_state.lang] for c in shortlist(f['current'],f['priority'])],'limitations':t('Family-based screening only; local season, soil, water and climate suitability not validated.','فحص حسب العيلة النباتية بس؛ ملاءمة الموسم والتربة والميّه والمناخ محليًا مش مثبتة.')}
-        st.download_button(t('Download my report · JSON','نزّل تقريري · JSON'),json.dumps(brief,ensure_ascii=False,indent=2),'field-shift-report.json','application/json',type='primary')
-    with b:
-        st.subheader(t('Sources & limitations','المصادر وحدود النتائج'))
-        st.markdown(f'- [NASA POWER — {t("daily climate records","بيانات المناخ اليومية")}](https://power.larc.nasa.gov/docs/services/api/temporal/daily/)\n- [FAO — {t("crop diversification","تنويع المحاصيل")}](https://www.fao.org/conservation-agriculture/in-practice/species-diversification/en/)\n- [FAO — {t("vegetable rotation principles","مبادئ تدوير محاصيل الخضار")}](https://www.fao.org/4/y5031e/y5031e0b.htm)')
-        st.caption(t('The catalogue is an editorial list of crop names and types, not a downloaded FAO dataset. Sources support general principles, not each local crop pairing.','الدليل قايمة تحريرية لأسماء وأنواع المحاصيل، مش قاعدة بيانات منزّلة من الفاو. المصادر بتدعم المبادئ العامة، مش كل تتابع محاصيل محلي.'))
-        st.caption(t('No measured water saving, yield forecast or NASA endorsement is claimed.','مفيش ادعاء بتوفير ميّه مقاس أو توقع إنتاجية أو اعتماد من ناسا.'))
+# ---------------------------------------------------------------- page 2: NASA evidence
+GREEN, BROWN = "#1f8a4c", "#c2571a"  # checked with the colour validator (green/brown pair, brown line is dashed)
+
+
+def _style(chart: alt.Chart) -> alt.Chart:
+    return (chart.properties(height=270, background="transparent")
+            .configure_view(strokeWidth=0)
+            .configure_axis(gridColor="#d9e2cd", domainColor="#9fb08f", labelColor="#173d2a", titleColor="#173d2a",
+                            labelFontSize=11, titleFontSize=12)
+            .configure_legend(labelColor="#173d2a", labelFontSize=12, orient="top", title=None))
+
+
+def line_chart(df: pd.DataFrame, cols: list[str], names: list[str], ytitle: str, zero: bool = True) -> alt.Chart:
+    labels = df["label"].tolist()
+    long = df.melt(id_vars="label", value_vars=cols, var_name="col", value_name="value")
+    long["series"] = long["col"].map(dict(zip(cols, names)))
+    colors = [GREEN, BROWN][: len(cols)]
+    dashes = [[1, 0], [6, 4]][: len(cols)]
+    base = alt.Chart(long).encode(
+        x=alt.X("label:N", sort=labels, title=None, axis=alt.Axis(labelAngle=0)),
+        y=alt.Y("value:Q", title=ytitle, scale=alt.Scale(zero=zero)),
+        color=alt.Color("series:N", scale=alt.Scale(domain=names, range=colors), legend=None),  # legend is drawn in HTML
+        strokeDash=alt.StrokeDash("series:N", scale=alt.Scale(domain=names, range=dashes), legend=None),
+        tooltip=[alt.Tooltip("label:N", title=""), alt.Tooltip("series:N", title=""),
+                 alt.Tooltip("value:Q", title=ytitle, format=".2f")])
+    return _style(base.mark_line(strokeWidth=2.5, point=alt.OverlayMarkDef(size=55, filled=True)))
+
+
+def bar_chart(df: pd.DataFrame, col: str, ytitle: str, color: str = GREEN) -> alt.Chart:
+    labels = df["label"].tolist()
+    base = alt.Chart(df).encode(
+        x=alt.X("label:N", sort=labels, title=None, axis=alt.Axis(labelAngle=0)),
+        y=alt.Y(f"{col}:Q", title=ytitle),
+        tooltip=[alt.Tooltip("label:N", title=""), alt.Tooltip(f"{col}:Q", title=ytitle, format=".1f")])
+    return _style(base.mark_bar(color=color, cornerRadiusTopLeft=4, cornerRadiusTopRight=4))
+
+
+def _peak_months(s: pd.Series, mode: str = "max") -> list[int]:
+    """Months (1..12) where the series is at its highest (or lowest) value; ties return every month."""
+    target = s.max() if mode == "max" else s.min()
+    return [int(m) for m in s.index if s.loc[m] == target]
+
+
+def evidence() -> None:
+    raw = load_profile().copy()
+    raw["month"] = raw["month"].astype(int)
+    period = str(raw["period"].iloc[0]).replace("-", "–")
+    hero(t("NASA EVIDENCE", "أدلة ناسا"),
+         t("What NASA records say about Monufia", "إيه اللي بتقوله سجلات ناسا عن المنوفية"),
+         t(f"Monthly averages for {period} for one area around Monufia. They describe the zone, not your field.",
+           f"متوسطات شهرية من {period} لمنطقة واحدة حوالين المنوفية. بتوصف المنطقة، مش حقلك."))
+
+    df = raw.copy()
+    df["label"] = [month_label(m) for m in df["month"]]
+    df["thirst"] = df["et0_mm"] - df["rain_mm"]
+    df["thirst"] = (df["thirst"] / df["thirst"].max() * 100).round(0)
+    by_month = df.set_index("month")
+
+    change = float(df["t_mean_change_c"].mean())
+    rain_year = float(df["rain_mm"].sum())
+    hot_year = float(df["hot_days_35"].sum())
+    a, b, c = st.columns(3)
+    a.metric(t("Warmer than 1981–1990", "أدفى من 1981–1990"), f"\u2066+{change:.1f} °C\u2069")  # isolates keep "+0.9 °C" in order in Arabic
+    b.metric(t("Rain in a whole year", "المطر في السنة كلها"), f"{rain_year:.0f} " + t("mm", "مم"))
+    c.metric(t("Very hot days a year", "أيام الحر الشديد في السنة"), f"{hot_year:.0f}",
+             help=t("Days at 35 °C or more", "أيام حرارتها 35 درجة أو أكتر"))
+
+    unit_c = "°C"
+    now_lbl, old_lbl = period, "1981–1990"  # plain numbers: no mixed-direction text in the legend
+
+    # 1. temperature -------------------------------------------------------------------------
+    st.subheader(t("Warmer than before", "أدفى من زمان"))
+    big = int(df.loc[df["t_mean_change_c"].idxmax(), "month"])
+    st.write(t(f"The average is about {change:.1f} {unit_c} warmer than in 1981–1990. The biggest rise is in {month_label(big)}: +{by_month.loc[big, 't_mean_change_c']:.1f} {unit_c}.",
+               f"المتوسط أعلى بحوالي {change:.1f} درجة من 1981–1990. أكبر ارتفاع في {month_label(big)}: +{by_month.loc[big, 't_mean_change_c']:.1f} درجة."))
+    d1 = df.rename(columns={"t_mean_c": "now", "t_mean_c_1981_90": "old"})
+    st.markdown(f'<div class="legend"><span><i class="sw"></i><bdi dir="ltr">{esc(now_lbl)}</bdi></span>'
+                f'<span><i class="sw dash"></i><bdi dir="ltr">{esc(old_lbl)}</bdi></span></div>', unsafe_allow_html=True)
+    st.altair_chart(line_chart(d1, ["now", "old"], [now_lbl, old_lbl], t("Mean temperature (°C)", "متوسط الحرارة (°C)"),
+                               zero=False), width="stretch")
+
+    # 2. very hot days ---------------------------------------------------------------------
+    st.subheader(t("Very hot days", "أيام الحر الشديد"))
+    dim = {m: calendar.monthrange(2023, m)[1] for m in range(1, 13)}
+    peak = _peak_months(by_month["hot_days_35"])
+    most = [m for m in by_month.index if by_month.loc[m, "hot_days_35"] > dim[m] / 2]
+    first, last = min(most), max(most)
+    n_peak = by_month.loc[peak[0], "hot_days_35"]
+    st.write(t(f"The most very hot days are in {join_names([month_label(m) for m in peak])}: about {n_peak:.0f} days a month at 35 °C or more. From {month_label(first)} to {month_label(last)}, more than half the days are that hot.",
+               f"أكتر أيام حر شديد في {join_names([month_label(m) for m in peak])}: حوالي {ex._days_ar(int(round(n_peak)))} في الشهر حرارتها 35 درجة أو أكتر. من {month_label(first)} لـ{month_label(last)}، أكتر من نص الأيام بالحرارة دي."))
+    st.altair_chart(bar_chart(df, "hot_days_35", t("Days at 35 °C or more", "أيام 35 درجة أو أكتر"), BROWN), width="stretch")
+
+    # 3. water -----------------------------------------------------------------------------
+    st.subheader(t("Little rain, thirsty air", "مطر قليل وهوا عطشان"))
+    low, high = _peak_months(by_month["thirst"], "min"), _peak_months(by_month["thirst"], "max")
+    rain_summer = float(by_month.loc[5:9, "rain_mm"].sum())
+    st.write(t(f"Rain is small: about {rain_year:.0f} mm in a whole year, and only about {rain_summer:.0f} mm from May to September. The air asks for the most water in {join_names([month_label(m) for m in high])} and the least in {join_names([month_label(m) for m in low])}. These are relative numbers for comparing months, not irrigation amounts.",
+               f"المطر قليل: حوالي {rain_year:.0f} مم في السنة كلها، وحوالي {rain_summer:.0f} مم بس من مايو لسبتمبر. الجو بيطلب أكتر مياه في {join_names([month_label(m) for m in high])} وأقل مياه في {join_names([month_label(m) for m in low])}. دي أرقام نسبية للمقارنة بين الشهور، مش كميات ري."))
+    st.altair_chart(bar_chart(df, "thirst", t("How thirsty the air is (100 = the thirstiest month)", "عطش الهوا (100 = أعطش شهر)")),
+                    width="stretch")
+
+    # 4. greenness -------------------------------------------------------------------------
+    st.subheader(t("How green the fields are", "الأرض خضرا قد إيه"))
+    hi, lo = _peak_months(by_month["ndvi_mean6"]), _peak_months(by_month["ndvi_mean6"], "min")
+    st.write(t(f"Satellites measure greenness (NDVI): higher means more green plants. Fields are greenest in {join_names([month_label(m) for m in hi])} ({by_month.loc[hi[0], 'ndvi_mean6']:.2f}) and least green in {join_names([month_label(m) for m in lo])} ({by_month.loc[lo[0], 'ndvi_mean6']:.2f}).",
+               f"الأقمار الصناعية بتقيس الخضرة (NDVI): الرقم الأعلى يعني نبات أخضر أكتر. الأرض أخضر ما تكون في {join_names([month_label(m) for m in hi])} ({by_month.loc[hi[0], 'ndvi_mean6']:.2f}) وأقل خضرة في {join_names([month_label(m) for m in lo])} ({by_month.loc[lo[0], 'ndvi_mean6']:.2f})."))
+    st.altair_chart(line_chart(df, ["ndvi_mean6"], [t("Greenness (NDVI)", "الخضرة (NDVI)")], t("Greenness (NDVI)", "الخضرة (NDVI)")),
+                    width="stretch")
+
+    with st.expander(t("Show the numbers", "اعرض الأرقام")):
+        table = pd.DataFrame({
+            t("Month", "الشهر"): df["label"],
+            t("Mean temperature now (°C)", "متوسط الحرارة دلوقتي (°C)"): df["t_mean_c"],
+            t("Mean temperature 1981–1990 (°C)", "متوسط الحرارة 1981–1990 (°C)"): df["t_mean_c_1981_90"],
+            t("Days at 35 °C or more", "أيام 35 درجة أو أكتر"): df["hot_days_35"],
+            t("Rain (mm)", "المطر (مم)"): df["rain_mm"],
+            t("How thirsty the air is (100 = highest)", "عطش الهوا (100 = الأعلى)"): df["thirst"],
+            t("Greenness (NDVI)", "الخضرة (NDVI)"): df["ndvi_mean6"]})
+        st.dataframe(table, hide_index=True, width="stretch")
+    bullets(ex.GAPS_GLOBAL_AR[2:3] + ex.GAPS_GLOBAL_AR[:1] if LANG == "ar" else ex.GLOBAL_GAPS[2:3] + ex.GLOBAL_GAPS[:1])
+    st.caption(t("NASA POWER (weather) and NASA MODIS MOD13Q1 (greenness). Water numbers come from the FAO-56 method on NASA weather.",
+                 "ناسا POWER (الطقس) وناسا MODIS MOD13Q1 (الخضرة). أرقام المياه محسوبة بطريقة FAO-56 على طقس ناسا."))
+
+
+# ---------------------------------------------------------------- page 3: how it works
+def about() -> None:
+    hero(t("HOW IT WORKS", "إزاي بتشتغل"),
+         t("No black box: you can read every rule.", "مفيش صندوق أسود: تقدر تقرا كل قاعدة."),
+         t("The plans come from written rules and NASA data. Here is what the tool does, what it uses, and what it cannot do.",
+           "الخطط طالعة من قواعد مكتوبة وبيانات ناسا. هنا هتلاقي الأداة بتعمل إيه، وبتستخدم إيه، ومبتعملش إيه."))
+    n_plans, n_s, n_w = len(ENG.pairs), len(SUMMER), len(WINTER)
+    soil_min = ENG.recommend(SUMMER[0], WINTER[0], "save_water")["soil_minimum"]
+
+    st.subheader(t("What this tool does", "الأداة دي بتعمل إيه"))
+    st.write(t("You tell us the summer crop and the winter crop you grow in one year, and what you want most: save money, save water, or improve the soil. We show three plans side by side:",
+               "إنت بتقول لنا المحصول الصيفي والمحصول الشتوي اللي بتزرعهم في السنة، وإيه أهم حاجة عندك: توفير الفلوس، أو توفير المياه، أو تحسين التربة. واحنا بنعرض لك تلات خطط جنب بعض:"))
+    bullets([t("**Plan A**: what you grow now.", "**الخطة A**: اللي بتزرعه دلوقتي."),
+             t("**Plan B**: the best plan for your goal.", "**الخطة B**: أحسن خطة لهدفك."),
+             t(f"**Plan C**: the best plan for your goal that also keeps the soil mark at {soil_min} or more.",
+               f"**الخطة C**: أحسن خطة لهدفك وكمان درجة التربة فيها {soil_min} أو أكتر.")])
+
+    st.subheader(t("How the plans get their marks", "الخطط بتاخد درجاتها إزاي"))
+    st.write(t(f"We looked at {n_plans} yearly plans ({n_s} summer crops × {n_w} winter crops). Each plan gets three marks out of 100: water, soil and cost-saving. The marks come from written rules, not from machine learning, so anyone can read them:",
+               f"بصينا على {n_plans} خطة سنوية ({n_s} محاصيل صيفي × {n_w} محاصيل شتوي). كل خطة بتاخد تلات درجات من 100: المياه والتربة وتوفير المصاريف. الدرجات طالعة من قواعد مكتوبة، مش من تعلّم آلي، فأي حد يقدر يقراها:"))
+    bullets([t("**Water mark**: each crop needs low, medium or high water. The less water, the higher the mark.",
+               "**درجة المياه**: كل محصول احتياجه للمياه قليل أو متوسط أو كبير. كل ما المياه أقل، الدرجة أعلى."),
+             t("**Soil mark**: beans and berseem put nitrogen back in the soil, heavy feeders take it out, a change of plant family helps against disease, and land that is covered by a crop for more of the year is better protected.",
+               "**درجة التربة**: الفول والبرسيم بيرجّعوا النيتروجين للتربة، والمحاصيل الشرهة بتاخده منها، وتغيير العيلة النباتية بيساعد ضد الأمراض، والأرض اللي عليها زرع أغلب السنة بتتحمي أكتر."),
+             t("**Cost-saving mark**: less water and less fertiliser give a higher mark. It is not profit. Prices are shown beside it and are never added to it.",
+               "**درجة توفير المصاريف**: مياه أقل وسماد أقل يعني درجة أعلى. دي مش ربح. الأسعار بتظهر جنبها ومبتتضافش عليها."),
+             t("**Heat level**: we count the very hot days (35 °C or more) in the two seasons. It is shown but not scored.",
+               "**مستوى الحرارة**: بنعدّ أيام الحر الشديد (35 درجة أو أكتر) في الموسمين. بيظهر لكن مش داخل في الدرجات.")])
+
+    st.subheader(t("Where NASA data is used", "بيانات ناسا بتتستخدم فين"))
+    bullets([t("**NASA POWER**: daily weather from 1981 to 2025 for one area of about 55 × 60 km around Monufia. We use it for heat, rain and how much water each crop needs.",
+               "**ناسا POWER**: طقس يومي من 1981 لـ2025 لمنطقة مساحتها حوالي 55 × 60 كم حوالين المنوفية. بنستخدمه للحرارة والمطر واحتياج كل محصول للمياه."),
+             t("**NASA MODIS (MOD13Q1)**: how green the plants are, seen from a satellite, at six points of 250 m.",
+               "**ناسا MODIS (MOD13Q1)**: خضرة النبات من القمر الصناعي، عند ست نقط (كل نقطة 250 متر)."),
+             t("**NASA SMAP L4 (SPL4SMGP)**: soil moisture at 9 km. Background only: it does not see Nile irrigation, so it never changes a mark.",
+               "**ناسا SMAP L4 (SPL4SMGP)**: رطوبة التربة على مسافة 9 كم. معلومة خلفية بس: مبتشوفش ري النيل، فمبتغيّرش أي درجة.")])
+
+    st.subheader(t("What this tool cannot do", "اللي الأداة دي مبتعملوش"))
+    bullets(ex.GAPS_GLOBAL_AR if LANG == "ar" else ex.GLOBAL_GAPS)
+    st.info(ex.DISCLAIMER[LANG])
+
+
+# ---------------------------------------------------------------- shell: sidebar, pages, style
+# The language switch sits at the top of the page (not in the side menu) so a farmer on a phone sees it at once.
+st.radio("Language / اللغة", ["en", "ar"], key="lang", horizontal=True,
+         format_func=lambda x: "🇬🇧 English (UK)" if x == "en" else "🇪🇬 عربي مصري")
+LANG = st.session_state.lang
 
 with st.sidebar:
-    st.markdown('## 🌱 FIELD SHIFT')
-    st.radio('Language / اللغة',['en','ar'],key='lang',format_func=lambda x:'🇬🇧 English (UK)' if x=='en' else '🇪🇬 عربي مصري')
-    LANG=st.session_state.lang
-    st.caption(t('Developed by team CALIPSO','اتطوّر بواسطة فريق CALIPSO'))
+    st.markdown("## 🌱 FIELD SHIFT")
+    st.caption(t("Monufia, Egypt · research prototype", "المنوفية، مصر · نموذج بحثي"))
+    st.caption(t("Developed by team CALIPSO", "اتطوّر بواسطة فريق CALIPSO"))
 
-page=st.navigation([st.Page(farm,title=t('Your farm','أرضك'),icon='🌱',default=True,url_path='farm'),st.Page(weather,title=t('Climate context','المناخ'),icon='☀️',url_path='climate'),st.Page(compare,title=t('Next crop','المحصول الجاي'),icon='🌾',url_path='crops'),st.Page(report,title=t('My report','تقريري'),icon='📋',url_path='report')])
+page = st.navigation([
+    st.Page(plans, title=t("Your plans", "خططك"), icon="🌱", default=True, url_path="plan"),
+    st.Page(evidence, title=t("NASA evidence", "أدلة ناسا"), icon="🛰️", url_path="evidence"),
+    st.Page(about, title=t("How it works", "إزاي بتشتغل"), icon="📖", url_path="about"),
+])
 
-background='data:image/jpeg;base64,'+base64.b64encode((ROOT/'assets'/'fields.jpg').read_bytes()).decode()
-direction='rtl' if st.session_state.lang=='ar' else 'ltr'
+background = "data:image/jpeg;base64," + base64.b64encode((ROOT / "assets" / "fields.jpg").read_bytes()).decode()
+direction = "rtl" if st.session_state.lang == "ar" else "ltr"
+align = "right" if direction == "rtl" else "left"
 
 st.markdown(f'''<style>
 [data-testid="stAppViewContainer"] {{background:linear-gradient(120deg,rgba(245,248,240,.96),rgba(245,248,240,.88)),url("{background}") center/cover fixed;color:#173d2a;}}
 [data-testid="stSidebar"]{{background:#153e2d;}} [data-testid="stSidebar"] *{{color:#f0f6e8;}}
 .block-container{{max-width:1260px;padding-top:2rem;direction:{direction};}} [data-testid="stSidebar"]{{direction:{direction};}}
 h1,h2,h3{{letter-spacing:-.02em;color:#173d2a;}}
+[data-testid="stHeading"], [data-testid="stCaptionContainer"] {{text-align:{align};}}
 .hero{{background:linear-gradient(90deg,rgba(15,49,32,.96),rgba(15,49,32,.3)),url("{background}") center/cover;border-radius:24px;padding:48px 42px;margin-bottom:30px;color:white;min-height:290px;}}
 .hero h1{{color:white;font-size:clamp(2rem,4vw,3.5rem);max-width:800px;line-height:1.3;margin:14px 0;}}
 .hero p{{max-width:680px;color:#e2eddf;font-size:18px;}}
 .eyebrow{{font-size:12px;font-weight:700;}}
 .pill{{display:inline-block;padding:8px 12px;border:1px solid #8bad70;border-radius:100px;font-size:11px;margin-top:12px;color:white;}}
-.note,.rotation{{background:#e7efdd;border:1px solid #d4dfc8;border-radius:20px;padding:24px;margin-bottom:16px;color:#173d2a;}}
-.rotation{{min-height:205px;}}
-.note h2,.rotation h3{{color:#153e2d;}}
-.note p,.rotation p{{color:#173d2a;}}
-[data-testid="stForm"]{{background:#ffffffd9;border-radius:20px;padding:24px;color:#173d2a;}}
-[data-testid="stForm"] label, [data-testid="stWidgetLabel"] p, .stSelectbox label {{color: #173d2a !important; font-weight: 600;}}
-[data-testid="stTable"] th, [data-testid="stTable"] td {{color: #173d2a !important; background-color: #ffffffd9 !important;}}
-.stDataFrame th, .stDataFrame td {{color: #173d2a !important;}}
+.note{{background:#e7efdd;border:1px solid #d4dfc8;border-radius:20px;padding:24px;margin-bottom:16px;color:#173d2a;}}
+.note h2{{color:#153e2d;}} .note p{{color:#173d2a;}}
+[data-testid="stWidgetLabel"] p, .stSelectbox label, .stRadio label, .stCheckbox label {{color:#173d2a !important; font-weight:600;}}
+[data-testid="stMetric"]{{background:#ffffffd9;border-radius:16px;padding:14px 18px;}}
+[data-testid="stMetric"] *{{color:#173d2a !important;}}
+.stDataFrame th, .stDataFrame td {{color:#173d2a !important;}}
 button{{border-radius:10px!important;}}
+.st-key-plan_A, .st-key-plan_B, .st-key-plan_C {{background:#ffffffe6;border-radius:20px;padding:6px;}}
+.role{{display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;margin-bottom:6px;}}
+.role-A{{background:#e4e4de;color:#34342d;}} .role-B{{background:#cfe6d3;color:#0f4a2a;}} .role-C{{background:#f1e3b9;color:#5a4300;}}
+.ptitle{{font-size:1.25rem;line-height:1.4;margin:4px 0 12px 0;}}
+.goalmark{{display:flex;justify-content:space-between;align-items:baseline;background:#e7efdd;border-radius:14px;padding:10px 14px;margin-bottom:12px;color:#153e2d;}}
+.goalmark b{{font-size:2rem;}} .goalmark small{{font-size:1rem;font-weight:600;}}
+.mark{{margin-bottom:9px;}} .mrow{{display:flex;justify-content:space-between;font-size:14px;color:#173d2a;}}
+.track{{background:#e3e9da;height:10px;border-radius:6px;margin-top:4px;}} .fill{{background:#6aa77f;height:10px;border-radius:6px;}} .fill.goal{{background:#1f8a4c;}}
+.legend{{display:flex;gap:24px;font-size:13px;margin:6px 0 0 0;color:#173d2a;}}
+.legend .sw{{display:inline-block;width:28px;height:0;border-top:3px solid #1f8a4c;vertical-align:middle;margin-inline-end:8px;}}
+.legend .sw.dash{{border-top:3px dashed #c2571a;}}
+.heat{{font-size:14px;margin:6px 0 12px 0;color:#173d2a;}}
 @media(max-width:640px) {{
   .hero {{padding:28px 22px;min-height:240px;}}
   .block-container {{padding:1rem;}}
 }}
-</style>''',unsafe_allow_html=True)
+</style>''', unsafe_allow_html=True)
 
 page.run()
 st.divider()
-st.caption(t('Developed by team CALIPSO','اتطوّر بواسطة فريق CALIPSO'))
+st.caption(t("Developed by team CALIPSO", "اتطوّر بواسطة فريق CALIPSO"))
